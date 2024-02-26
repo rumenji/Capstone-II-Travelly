@@ -121,7 +121,7 @@ Reference to the project board and issues:
 ## User Flow Diagram
 
 
-[User Flow Diagram](UserFlowCapstoneII.png)
+[User Flow Diagram](UserFlowCapstoneII.jpg)
 
 
 
