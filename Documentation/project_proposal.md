@@ -1,48 +1,40 @@
 # Project Proposal
 
-This project is about creating a web application that allows help desk users to keep track of issues by creating tickets, and activity logs for each ticket.
-The app also has metrics that will be displayed on the dashboard homepage.
+This project is about creating a web application that allows users to create trip itineraries, search for places of interest and add them for each day of their trip so they can plan and keep track of daily activites.
 
 ## Goal
 
-- A web application that allows help desk users to create support tickets and log activities. 
-- The app will provide statistics about the issues and time logged. 
-- The app will keep track of the clients.
-- There will be two user types - admin and standard, with the admin being able to set the app for the standard users.
+- A web application that allows users to track their trip activities
+- The app will provide the option to add activities per day. 
+- The app will show relevant POIs that can be added to the itinerary.
+- The app will require login - no permission levels required
 
 ## User Profile
 
-There'll be two users type:
-- Admin
-  - Admin can create, update, and delete setting types, like ticket priority, status, and type; configurations status, and configurations.
-  - Admin can create, update, and delete users.
-  - Admin can perfomr all regular user tasks.
+There'll be a single user type:
 - Regular users
-  - Regular users can create, update, and log activites for tickets.
-  - Regular users can view tickets created by other users.
-  - Regular user can view and create contacts.
-  - Regular users can view the dashboard.
+  - Regular users can create, update, and log trips.
+  - Regular users can add activities/POIs to trips.
+  - Regular users can search for POIs.
 
 ## Data / API Information
 
-The data will be logged by the help desk users.
-Admins will have to set up the app for the users beforehand.
-External API will be used to send email notifications to clients, and a copy to the assigned employee.
+The data about POIs will be privided by the TomTom Places API.
+Users can search for POIs and add them to their itinerary.
+The local database will store information about the trip - optional location and time period. It will also store information about days of the trips - each day will have different activities/POIs added to it, with the time it would take to visit.
 
 ## Methodologies
 
 ### Tech Stack
 
-- Python
-- Flask
+- Node.js
+- Express.js
 - JavaScript
-- jQuery
+- React
 - CSS
 - Bootstrap
-- Flask-SQLAlchemy
-- WTF-Forms
+- PostreSQL
 - Bcrypt
-- Bokeh
 
 ### Database Schema
 
@@ -50,11 +42,11 @@ External API will be used to send email notifications to clients, and a copy to 
 
 - DB design assumptions:
 
-  - A user can create many tickets.
-  - A user can be assigned to many tickets.
-  - A ticket can have many ticket activities.
-  - A ticket can have only one status, priority, or type.
-  - A ticket can have only one contact/client, or configuration /the device the issue refers to/.
+  - A user can create many trips/itineraries.
+  - A user can create many days in a trip.
+  - A day can have many activities/POIs.
+  - A day can belong to one trip.
+  - A POIs can belong to may days and trips.
 
 ### Security
 
@@ -65,7 +57,6 @@ External API will be used to send email notifications to clients, and a copy to 
 
   - User passwords
   - User email addresses
-  - User email addresses
 
 ## Features
 
@@ -74,42 +65,40 @@ MUST-HAVE
 
 | Feature | Estimated Time | Actual Time |
 | ------- | -------------- | ----------- |
-| Create tickets for logged issues       |  10 hrs          | 13 hrs       |
-| Send email notifications at ticket creation | 2 hrs | 1 hr |
-| Add ticket activities to each ticket | 5 hrs | 3.5 hrs |
-| Add time spent to each activity and a total for the ticket | 2 hrs | 1.75 hrs |
-| View/Add/Edit contacts list | 1 hr | 1 hr|
-| Two user types - admin and standard | 2 hrs | 1.5 hrs |
-| Settings menu for admins | 10 hrs | 11 hrs |
-| Dashboard with metrics | 10 hours | 14 hrs |
+| Create trips     |  10 hrs          | 13 hrs       |
+| Create days for each trip | 2 hrs | 1 hr |
+| Add activities/POIs for each trip | 5 hrs | 3.5 hrs |
+| Add time it takes to visit for each trip | 2 hrs | 1.75 hrs |
+| View/Add/Edit POIs | 1 hr | 1 hr|
+| Single user type | 2 hrs | 1.5 hrs |
+| Dashboard with list of trips| 10 hours | 14 hrs |
 
 
 SHOULD-HAVE
 
 | Feature | Estimated Time | Actual Time |
 | ------- | -------------- | ----------- |
-| Allow resending notificaiton for email failure| 1 hr | 1 hr |
+| Auto-create days based on the trip time range | 10 hr | 10 hr |
 
 
 COULD-HAVE
 
 | Feature | Estimated Time | Actual Time |
 | ------- | -------------- | ----------- |
-| Part with support and KB articles to attach to tickets     | 10 hrs          |        |
-| Part with more in-depth documentation for the support matter - like IT equipment, etc. | 15 hrs | |
+| Map of the POI     | 10 hrs          |        |
+
 
 MORE THAN CRUD FEATURES
 
 | Feature | Estimated Time | Actual Time |
 | ------- | -------------- | ----------- |
-| Dashboard with metrics/statistics about tickets per date/range/assignee | 10 hours | 14 hrs |
 
 ### Tasks
 
 Reference to the project board and issues:
 
-[Project Board][https://github.com/rumenji/Capstone1Personal/projects?query=is%3Aopen](https://github.com/rumenji/Capstone1Personal/projects?query=is%3Aopen)
-[List of Issues][https://github.com/rumenji/Capstone1Personal/issues](https://github.com/rumenji/Capstone1Personal/issues)
+[Project Board][https://github.com/rumenji/Capstone-II/projects?query=is%3Aopen]
+[List of Issues][https://github.com/rumenji/Capstone-II/issues]
 
 **New issue checklist:**
 
@@ -132,7 +121,7 @@ Reference to the project board and issues:
 ## User Flow Diagram
 
 
-[User Flow Diagram](Cap1UserFlow.png)
+[User Flow Diagram](UserFlowCapstoneII.png)
 
 
 
@@ -141,12 +130,11 @@ Reference to the project board and issues:
 
 | Challenges     | Risk Mitigation Plan / Strategy |
 | -------------- | ------------------------------- |
-| API down       | Alert users that the email is not successfully sent, and allow them to resend |
 | Securing user passwords       | Hashing the passwords with Bcrypt |
 
 ## Out of Scope
 
 
 - Will not have detailed permissions settings and levels of access.
-- Will not have reporting other than the Dashboard statistics.
+- Will not have reporting.
 - Will not have support and KB articles available within the app.
