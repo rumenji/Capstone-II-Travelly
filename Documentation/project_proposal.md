@@ -52,6 +52,7 @@ The local database will store information about the trip - optional location and
 
   - User passwords will be hashed using bcrypt library.
   - User passwords will be validated using the bcrypt library.
+  - JSON Web Tokens
 
 - Sensitive information that needs to be protected:
 
