@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/tripNew.json",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 30
+    },
+    "location_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 40
+    },
+    "loc_long": {
+      "type": "string",
+      "pattern": "0|(0?\\.[0-9]+)"
+    },
+    "loc_lat": {
+      "type": "string",
+      "pattern": "0|(0?\\.[0-9]+)"
+    },
+    "from_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "to_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "username": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 30
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "name"
+  ]
+}
