@@ -7,7 +7,7 @@ CREATE DATABASE capstoneii;
 
 \i capstoneii-schema.sql
 
-\echo 'Delete and recreate capstineii_test db?'
+\echo 'Delete and recreate capstoneii_test db?'
 \prompt 'Return for yes or control-C to cancel > ' foo
 
 DROP DATABASE capstoneii_test;
