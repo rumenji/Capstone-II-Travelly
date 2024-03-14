@@ -20,44 +20,54 @@ class Trip {
         }
     }
 
-    // static async getAll({username}){
-    //     const sqlQuery = `
-    //     SELECT name, location_name, loc_long, loc_lat, from_date, to_date, user_username
-    //     FROM trips
-    //     WHERE username = $1`;
-
-    //     try {
-    //         const result = await db.query(sqlQuery, [username]);
-    //         const trip = result.rows[0];
-    //         return trip;
-    //     } catch (error) {
-    //     // Handle potential errors (e.g., unique constraint violations)
-    //     throw new BadRequestError(`Error getting trips: ${error}`, 400); 
-    //     }
-    // }
 
     static async get(id) {
         
-        const sqlQuery = `
+        const sqlQueryTrip = `
         SELECT id,
                 name,
                 location_name, 
                 loc_long, 
                 loc_lat, 
                 from_date, 
-                to_date
+                to_date,
+                user_username
         FROM trips
         WHERE id = $1`;
         
+        const sqlQueryDays = `
+        SELECT id, name
+        FROM days
+        WHERE trip_id=$1
+        ORDER BY TO_DATE(name, 'MM-DD') ASC`;
+
         try {
-            const result = await db.query(sqlQuery, [id]);
-            const trip = result.rows[0];
+            const tripResult = await db.query(sqlQueryTrip, [id]);
+            const trip = tripResult.rows[0];
             if (!trip) throw new NotFoundError(`No trip: ${id}`);
+
+            const daysResult = await db.query(sqlQueryDays, [id]);
+
+            trip.days = daysResult.rows;
+
             return trip;
         } catch (error) {
             // Handle potential errors (e.g., unique constraint violations)
             throw new BadRequestError(`Error getting trip: ${error}`, 400); 
         }   
+    };
+
+    static async delete(id){
+        try {
+            const sqlQuery = `
+            DELETE FROM trips
+            WHERE id=$1;
+            `
+            await db.query(sqlQuery, [id]);
+        } catch (error) {
+            throw new BadRequestError(`Error deleting trip: ${error}`, 400);
+        }
+        
     }
 }
 
