@@ -37,6 +37,8 @@
   },
   "additionalProperties": false,
   "required": [
-    "name"
+    "name",
+    "from_date",
+    "to_date"
   ]
 }

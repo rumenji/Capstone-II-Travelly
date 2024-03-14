@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const { authenticateJWT, ensureLoggedIn} = require("./middleware/auth");
 
-const ExpressError = require("./expressError")
+const { NotFoundError } = require("./expressError");
 const app = express();
 
 // allow both form-encoded and json body parsing
@@ -18,16 +18,19 @@ app.use(authenticateJWT);
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/users");
 const tripRoutes = require("./routes/trips");
+const dayRoutes = require("./routes/days");
+const placeRoutes = require("./routes/places");
 
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/trips", tripRoutes);
+app.use("/days", dayRoutes);
+app.use("/places", placeRoutes);
 
 /** 404 handler */
 
 app.use(function(req, res, next) {
-    const err = new ExpressError("Not Found", 404);
-    return next(err);
+  return next(new NotFoundError());
   });
   
   /** general error handler */
