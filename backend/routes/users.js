@@ -44,7 +44,8 @@ router.get("/:username", ensureCorrectUser, async function (req, res, next) {
 
 router.get("/:username/trips", ensureCorrectUser, async function (req, res, next) {
     try {
-      const trips = await User.trips(req.params.username);
+      const searchPastTrips = req.query.q || null;
+      const trips = await User.trips(req.params.username, searchPastTrips);
       return res.json({trips});
     } catch (err) {
       return next(err);

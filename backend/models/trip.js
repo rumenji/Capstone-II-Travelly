@@ -1,5 +1,7 @@
 const db = require('../db');
 const { BadRequestError, NotFoundError } = require("../expressError");
+const { getDaysToAdd, getDaysToDelete } = require("../helpers/dateRange");
+const Day = require("./day");
 
 class Trip {
 
@@ -7,7 +9,7 @@ class Trip {
         const sqlQuery = `
             INSERT INTO trips (name, location_name, loc_long, loc_lat, from_date, to_date, user_username) 
             VALUES ($1, $2, $3, $4, $5, $6, $7) 
-            RETURNING id, name;  
+            RETURNING id;  
         `;
 
         try {
@@ -20,35 +22,37 @@ class Trip {
         }
     }
 
-
     static async get(id) {
         
         const sqlQueryTrip = `
-        SELECT id,
-                name,
-                location_name, 
-                loc_long, 
-                loc_lat, 
-                from_date, 
-                to_date,
-                user_username
+        SELECT trips.id,
+                trips.name,
+                trips.location_name, 
+                trips.loc_long, 
+                trips.loc_lat, 
+                trips.from_date, 
+                trips.to_date,
+                trips.user_username,
+                json_agg(json_build_object('id', days.id,'name', days.name) ORDER BY TO_DATE(days.name, 'MM-DD')) AS days
         FROM trips
-        WHERE id = $1`;
+        LEFT JOIN 
+                days ON trips.id = days.trip_id
+        WHERE trips.id = $1
+        GROUP BY 
+                trips.id
+        ORDER BY 
+            trips.from_date;
+        `;
         
-        const sqlQueryDays = `
-        SELECT id, name
-        FROM days
-        WHERE trip_id=$1
-        ORDER BY TO_DATE(name, 'MM-DD') ASC`;
 
         try {
             const tripResult = await db.query(sqlQueryTrip, [id]);
             const trip = tripResult.rows[0];
             if (!trip) throw new NotFoundError(`No trip: ${id}`);
 
-            const daysResult = await db.query(sqlQueryDays, [id]);
+            // const daysResult = await db.query(sqlQueryDays, [id]);
 
-            trip.days = daysResult.rows;
+            // trip.days = daysResult.rows;
 
             return trip;
         } catch (error) {
@@ -56,6 +60,36 @@ class Trip {
             throw new BadRequestError(`Error getting trip: ${error}`, 400); 
         }   
     };
+
+    static async edit({name, from_date, to_date}, tripId) {
+        const sqlQuery = `
+            UPDATE trips 
+            SET name = $1, from_date = $2, to_date = $3
+            WHERE id = $4
+            RETURNING id;  
+        `;
+
+        const daysSqlQuery = `
+                SELECT name
+                FROM days
+                WHERE trip_id = $1
+                `;
+       
+        try {
+            const trip = await db.query(sqlQuery, [name, from_date, to_date, tripId])
+            const existingDaysResult = await db.query(daysSqlQuery, [tripId]);
+            const existingDays = existingDaysResult.rows.map(row => row.name);
+            const daysToAdd = getDaysToAdd(from_date, to_date, existingDays);
+            const daysToDelete = getDaysToDelete(from_date, to_date, existingDays);
+            daysToDelete.length > 0 && daysToDelete.map(day => Day.delete(day, tripId));
+            daysToAdd.length > 0 && daysToAdd.map(day => Day.create({name: day}, tripId));
+            const editedTripId = trip.rows[0].id;
+            return editedTripId;
+        } catch (error) {
+            // Handle potential errors (e.g., unique constraint violations)
+            throw new BadRequestError(`Error saving trip: ${error}`, 400); 
+        }
+    }
 
     static async delete(id){
         try {

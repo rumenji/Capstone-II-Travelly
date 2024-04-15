@@ -16,8 +16,8 @@ class Place {
 
         try {
             const result = await db.query(sqlQuery, [id, name, address, loc_long, loc_lat, category]);
-            const newTrip = result.rows[0];
-            return newTrip;
+            const newPlace = result.rows[0];
+            return newPlace;
         } catch (error) {
             // Handle potential errors (e.g., unique constraint violations)
             throw new BadRequestError(`Error saving place: ${error}`, 400); 
@@ -35,7 +35,7 @@ class Place {
         try {
             const result = await db.query(sqlQuery, [id]);
             const place = result.rows[0];
-            if (!place) throw new NotFoundError(`No place: ${id}`);
+            // if (!place) throw new NotFoundError(`No place: ${id}`);
             
             return place;
         } catch (error) {

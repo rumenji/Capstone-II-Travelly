@@ -16,7 +16,7 @@ CREATE TABLE trips (
     loc_lat DECIMAL, 
     from_date date NOT NULL,
     to_date date NOT NULL,
-    user_username text NOT NULL REFERENCES users ON DELETE CASCADE -- Ensures deletion of trips when user is deleted
+    user_username text NOT NULL REFERENCES users ON DELETE CASCADE
 );
 
 CREATE TABLE days (
@@ -35,7 +35,6 @@ CREATE TABLE places (
     
 );
 
--- Create the junction table for many-to-many relationship
 CREATE TABLE trips_places (
     id SERIAL PRIMARY KEY,
     day_id INTEGER REFERENCES days(id) ON DELETE CASCADE,

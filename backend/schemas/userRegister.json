@@ -13,6 +13,11 @@
       "minLength": 5,
       "maxLength": 20
     },
+    "confirm_password": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 20
+    },
     "first_name": {
       "type": "string",
       "minLength": 1,
