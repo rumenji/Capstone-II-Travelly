@@ -30,6 +30,7 @@ router.post('/', ensureLoggedIn, async function (req, res, next) {
  * returns array of found places
  */
 router.post("/search", ensureLoggedIn, async function (req, res, next) {
+    try{
     // Gets trip by id 
     const trip = await Trip.get(+req.body.trip_id);
     // Encodes search query for URL format
@@ -39,6 +40,9 @@ router.post("/search", ensureLoggedIn, async function (req, res, next) {
     const placesList = await axiosFindPlace(urlQuery, trip.loc_long, trip.loc_lat)
 
     return res.json(placesList);
+    } catch (error) {
+        return next(error);
+    }
 })
 
 /* Get a place by ID

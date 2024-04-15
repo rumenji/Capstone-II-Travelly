@@ -3,17 +3,27 @@
   "$id": "http://example.com/userUpdate.json",
   "type": "object",
   "properties": {
+    "username": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 30
+    },
     "password": {
       "type": "string",
       "minLength": 5,
       "maxLength": 20
     },
-    "firstName": {
+    "current_password": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 20
+    },
+    "first_name": {
       "type": "string",
       "minLength": 1,
       "maxLength": 30
     },
-    "lastName": {
+    "last_name": {
       "type": "string",
       "minLength": 1,
       "maxLength": 30
@@ -26,5 +36,11 @@
     }
   },
   "additionalProperties": false,
-  "required": []
+  "required": [
+    "username",
+    "first_name",
+    "last_name",
+    "current_password",
+    "email"
+  ]
 }
