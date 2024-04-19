@@ -8,13 +8,12 @@ describe('Spinner', () => {
     render(<Spinner />);
 
     // Assert the spinner element is in the document
-    const spinnerElement = screen.getByRole('status'); 
+    const spinnerElement = screen.getByRole('status');
     expect(spinnerElement).toBeInTheDocument();
 
     // Assert the loading text
     const loadingText = screen.getByText('Loading...');
     expect(loadingText).toBeInTheDocument();
-
-    expect(spinnerElement).toHaveClass('spinner'); 
+    expect(spinnerElement).toHaveClass('spinner');
   });
 });

@@ -82,9 +82,6 @@ class Day {
      */
     static async addPlace(dayId, place){
         try{
-            // const sqlQueryDelete = `DELETE FROM trips_places
-            // WHERE day_id=$1`;
-
             const sqlQueryAdd = `
             INSERT INTO trips_places (day_id, place_id, time_of_day, time_to_visit)
             VALUES ($1, $2, $3, $4)

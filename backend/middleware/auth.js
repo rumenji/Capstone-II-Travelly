@@ -1,11 +1,11 @@
-/** Middleware for handling req authorization for routes. */
-
 const jwt = require("jsonwebtoken");
 require('dotenv').config()
 const SECRET_KEY = process.env.SECRET_KEY;
 const { UnauthorizedError } = require("../expressError");
 
-/** Middleware: Authenticate user. */
+/** Middleware: Authenticate user. 
+ * Assigns the username to res.locals.user 
+*/
 
 function authenticateJWT(req, res, next) {
   try {
@@ -37,8 +37,6 @@ function ensureLoggedIn(req, res, next) {
 function ensureCorrectUser(req, res, next) {
   try {
     const user = res.locals.user;
-    // console.log('User:', user.username)
-    // console.log('Req params:', req.params.username)
     if (!(user && user.username === req.params.username)) {
       throw new UnauthorizedError();
     }

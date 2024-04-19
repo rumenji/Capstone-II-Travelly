@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store/authSlice';
-
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,6 +10,9 @@ import AirplaneTicketIcon from '@mui/icons-material/AirplaneTicket';
 import { Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem } from '@mui/material';
 import "./NavBar.css";
 
+/**Navbar component - shows trips and home for logged in users, or login/register for not authenticated users
+ * Drop down for user menu options and logout
+ */
 const NavBar = () => {
   const { userInfo, loading } = useSelector((state) => state.auth)
   const dispatch = useDispatch();

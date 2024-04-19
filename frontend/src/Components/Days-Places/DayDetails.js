@@ -8,28 +8,32 @@ import Place from './Place';
 
 import PlaceAddForm from '../Days-Places/PlaceAddForm';
 
-const DayDetails = ({dayId}) => {
-    const day = useSelector(selectDayDetails);
-    const dispatch = useDispatch();
-    const {tripDetails} = useSelector(state => state.tripDetails)
-    
+/**Component showing the details for each selected day inside the tripDetails component
+ * Form to add a new place to visit
+ * Listing all existing places added to the day
+ */
+const DayDetails = ({ dayId }) => {
+  const day = useSelector(selectDayDetails);
+  const dispatch = useDispatch();
+  const { tripDetails } = useSelector(state => state.tripDetails)
 
-    useEffect(() => {
-                dispatch(fetchDayById(dayId))
-    }, [dispatch, dayId])
+
+  useEffect(() => {
+    dispatch(fetchDayById(dayId))
+  }, [dispatch, dayId])
 
 
-    return (
+  return (
     <Box>
-    <Typography variant="h6">Activities for {convertDate(day.name)}</Typography>
-    
-    <Stack direction="column" sx={{ overflow: 'auto' }} spacing={{ xs: 1, sm: 1, md: 2 }}>
-    <PlaceAddForm tripId={tripDetails.id} dayId={day.id}/>
-    {day.places && day.places.length > 0 ? <Place places={day.places} dayId={day.id}/> : <Typography variant='body1'>No activities for the selected day.</Typography>}
-    
-    </Stack>
-  </Box>
-      
-    );
-  };
+      <Typography variant="h6">Activities for {convertDate(day.name)}</Typography>
+
+      <Stack direction="column" sx={{ overflow: 'auto' }} spacing={{ xs: 1, sm: 1, md: 2 }}>
+        <PlaceAddForm role="form" tripId={tripDetails.id} dayId={day.id} />
+        {day.places && day.places.length > 0 ? <Place data-testid="activity" places={day.places} dayId={day.id} /> : <Typography data-testid="no-activity" variant='body1'>No activities for the selected day.</Typography>}
+
+      </Stack>
+    </Box>
+
+  );
+};
 export default DayDetails;

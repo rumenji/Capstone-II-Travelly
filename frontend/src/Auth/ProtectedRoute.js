@@ -1,13 +1,10 @@
-// ProtectedRoute.js
 import { useSelector } from 'react-redux'
 import { NavLink, Outlet } from 'react-router-dom'
-import ErrorAlert from '../Components/ErrorAlert'
 
+/**Protected route that requires a user to be logged in */
 const ProtectedRoute = () => {
-  const { userInfo, error } = useSelector((state) => state.auth)
-  if(error) {
-    return <ErrorAlert error={error} />
-  }
+  const { userInfo } = useSelector((state) => state.auth)
+  
   // show unauthorized screen if no user is found in redux store
   if (!userInfo) {
     return (
