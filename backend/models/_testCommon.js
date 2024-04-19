@@ -11,7 +11,6 @@ async function commonBeforeAll() {
   await db.query("DELETE FROM days");
   await db.query("ALTER SEQUENCE days_id_seq RESTART WITH 1");
   await db.query("DELETE FROM places");
-  // await db.query("ALTER SEQUENCE places_id_seq RESTART WITH 1");
 
   await db.query(`
         INSERT INTO users(username,
@@ -37,8 +36,15 @@ async function commonBeforeAll() {
   const testDay = await db.query(`INSERT INTO days (name, trip_id) 
   VALUES ($1, $2) 
   RETURNING id, name; `, ["03-23", 1 ])
-  
-    }
+
+    const testPlace = await db.query(`INSERT INTO places (id, name, address, loc_long, loc_lat, category) 
+    VALUES ($1, $2, $3, $4, $5, $6) 
+    RETURNING id, name; `, ["2Lmp6i0Y_gQp1qPAmdtNTg", "Eiffel Tower", "Avenue Gustave Eiffel, 75007 Paris", 2.294351, 48.858844, [
+			"important tourist attraction",
+			"tower"
+		]])
+    
+      }
   
 
 async function commonBeforeEach() {

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const NotFound = ({type}) => {
+/**Not found page - generic or for trips */
+const NotFound = ({ type }) => {
   return (
     <div className="not-found">
-      {type === 'trip' 
+      {type === 'trip'
         ? <h1>Trip Not Found</h1>
         : <h1>404 - Page Not Found</h1>
       }

@@ -1,14 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const jsonschema = require("jsonschema");
 const Trip = require("../models/trip");
 const Day = require("../models/day");
-const Place = require("../models/place");
-const { BadRequestError, UnauthorizedError, NotFoundError } = require("../expressError");
-const {ensureLoggedIn, ensureCorrectUser} = require("../middleware/auth");
-const tripNewSchema = require("../schemas/tripNew");
-const dayNewSchema = require("../schemas/dayNew");
-const { dateRange } = require("../helpers/dateRange");
+const { UnauthorizedError } = require("../expressError");
+const { ensureLoggedIn, ensureCorrectUser } = require("../middleware/auth");
 
 /**Gets day by ID
  * Checks if user is logged in and matches the trip owner
@@ -19,7 +14,7 @@ router.get('/:id', ensureLoggedIn, async function (req, res, next) {
         const day = await Day.get(req.params.id)
         // Checking if the trip the day is part of has a user that matches the logged in user
         const trip = await Trip.get(day.trip_id)
-        if(trip.user_username !== res.locals.user.username){
+        if (trip.user_username !== res.locals.user.username) {
             throw new UnauthorizedError("Unauthorized!")
         }
         return res.json(day);
@@ -33,18 +28,18 @@ router.get('/:id', ensureLoggedIn, async function (req, res, next) {
  * expects {id, time_of_day, time_to_visit}
  * => {id, name, trip_id, places: [{id, name, address, loc_long, loc_lat, category}, ...]
  */
-router.post('/:id', ensureLoggedIn, async function (req, res, next){
-    try{
+router.post('/:id', ensureLoggedIn, async function (req, res, next) {
+    try {
         const dayId = req.params.id;
         const day = await Day.get(dayId);
         // Checking if the trip day has a user that matches the logged in user
         const trip = await Trip.get(day.trip_id)
-        if(trip.user_username !== res.locals.user.username){
+        if (trip.user_username !== res.locals.user.username) {
             throw new UnauthorizedError("Unauthorized!")
         };
 
         const result = await Day.addPlace(dayId, req.body);
-        
+
         return res.status(201).json(result);
     } catch (error) {
         return next(error);
@@ -56,18 +51,18 @@ router.post('/:id', ensureLoggedIn, async function (req, res, next){
  * expects {id, time_of_day, time_to_visit}
  * => {id, name, trip_id, places: [{id, name, address, loc_long, loc_lat, category}, ...]
  */
-router.put('/:dayId', ensureLoggedIn, async function (req, res, next){
-    try{
+router.put('/:dayId', ensureLoggedIn, async function (req, res, next) {
+    try {
         const dayId = req.params.dayId;
         const day = await Day.get(dayId);
         // Checking if the trip day has a user that matches the logged in user
         const trip = await Trip.get(day.trip_id)
-        if(trip.user_username !== res.locals.user.username){
+        if (trip.user_username !== res.locals.user.username) {
             throw new UnauthorizedError("Unauthorized!")
         };
 
         const result = await Day.editPlace(dayId, req.body);
-        
+
         return res.status(201).json(result);
     } catch (error) {
         return next(error);
@@ -79,14 +74,14 @@ router.put('/:dayId', ensureLoggedIn, async function (req, res, next){
  * expects {id}
  * => {id, name, trip_id, places: [{id, name, address, loc_long, loc_lat, category}, ...]
  */
-router.delete('/:dayId/:placeId', ensureLoggedIn, async function (req, res, next){
-    try{
+router.delete('/:dayId/:placeId', ensureLoggedIn, async function (req, res, next) {
+    try {
         const dayId = req.params.dayId;
         const placeId = req.params.placeId;
         const day = await Day.get(dayId);
         // Checking if the trip day has a user that matches the logged in user
         const trip = await Trip.get(day.trip_id)
-        if(trip.user_username !== res.locals.user.username){
+        if (trip.user_username !== res.locals.user.username) {
             throw new UnauthorizedError("Unauthorized!")
         };
         const result = await Day.deletePlace(dayId, placeId);

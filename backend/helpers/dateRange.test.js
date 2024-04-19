@@ -1,9 +1,8 @@
-// Import the function to be tested
-const {dateRange} = require('./dateRange');
+const { dateRange } = require('./dateRange');
 
 // Test suite for dateRange function
 describe('dateRange', () => {
-  // Test case 1: Start and end date are the same
+  // Start and end date are the same
   it('should return the day in the array when start and end date are the same', () => {
     const startDate = '2023-07-31';
     const endDate = '2023-07-31';
@@ -12,7 +11,7 @@ describe('dateRange', () => {
     expect(actualOutput).toEqual(expectedOutput);
   });
 
-  // Test case 2: Start date is before end date
+  // Start date is before end date
   it('should return an array of dates between start and end date', () => {
     const startDate = '2023-07-31';
     const endDate = '2023-08-04';
@@ -21,7 +20,7 @@ describe('dateRange', () => {
     expect(actualOutput).toEqual(expectedOutput);
   });
 
-  // Test case 3: Start date is after end date
+  // Start date is after end date
   it('should return an empty array when start date is after end date', () => {
     const startDate = '2023-08-05';
     const endDate = '2023-08-04';

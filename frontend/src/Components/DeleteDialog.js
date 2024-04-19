@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -11,10 +11,11 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { deleteTrip, placeDeleteFromDay } from '../thunks';
 
-export default function DeleteDialog({props}) {
-    const navigate = useNavigate();
+/**Dialog component for confirm deleting trips or places */
+export default function DeleteDialog({ props }) {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -24,18 +25,18 @@ export default function DeleteDialog({props}) {
   };
 
   const handleConfirm = () => {
-    if(props.tripId){
-        dispatch(deleteTrip(props.tripId))
-        navigate('/trips')
+    if (props.tripId) {
+      dispatch(deleteTrip(props.tripId))
+      navigate('/trips')
     } else {
-        dispatch(placeDeleteFromDay({dayId: props.dayId, placeId: props.placeId}))
+      dispatch(placeDeleteFromDay({ dayId: props.dayId, placeId: props.placeId }))
     }
     setOpen(false);
   };
 
   return (
     <React.Fragment>
-      <DeleteIcon onClick={handleClickOpen} fontSize='medium'/>
+      <DeleteIcon onClick={handleClickOpen} fontSize='medium' />
       <Dialog
         open={open}
         onClose={handleClose}
@@ -54,8 +55,8 @@ export default function DeleteDialog({props}) {
           <Button onClick={handleClose}>Close</Button>
           <Button onClick={handleConfirm} autoFocus>
             <Typography sx={{
-          color: "red",
-         }}>Delete</Typography>
+              color: "red",
+            }}>Delete</Typography>
           </Button>
         </DialogActions>
       </Dialog>

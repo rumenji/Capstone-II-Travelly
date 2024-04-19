@@ -3,10 +3,9 @@ const router = express.Router();
 const jsonschema = require("jsonschema");
 const Trip = require("../models/trip");
 const Day = require("../models/day");
-const { BadRequestError, UnauthorizedError, NotFoundError } = require("../expressError");
-const {ensureLoggedIn, ensureCorrectUser} = require("../middleware/auth");
+const { BadRequestError, UnauthorizedError } = require("../expressError");
+const {ensureLoggedIn} = require("../middleware/auth");
 const tripNewSchema = require("../schemas/tripNew");
-const dayNewSchema = require("../schemas/dayNew");
 const { dateRange } = require("../helpers/dateRange");
 const { axiosFindGeoCode } = require("../helpers/axios");
 

@@ -4,13 +4,6 @@ CREATE DATABASE capstoneii_test;
 
 \i capstoneii-schema.sql
 
--- -- Insert users
--- INSERT INTO users (username, password, first_name, last_name, email, join_at, last_login_at) 
--- VALUES ('user1', 'password1',  'John', 'Doe', 'test@test.com', '2024-06-08'::date, '2024-06-08'::date),
---        ('user2', 'password1', 'John', 'Doe', 'test1@test.com', '2024-06-08'::date, '2024-06-08'::date),
---        ('user3', 'password1', 'John', 'Doe', 'test2@test.com', '2024-06-08'::date, '2024-06-08'::date);
-
-
 -- Insert trips
 INSERT INTO trips (name, location_name, loc_long, loc_lat, from_date, to_date, user_username)
 VALUES 
