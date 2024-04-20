@@ -1,27 +1,31 @@
 # Project Proposal
 
-This project is about creating a web application that allows users to create trip itineraries, search for places of interest and add them for each day of their trip so they can plan and keep track of daily activites.
+This project is about creating a web application that allows users to create trip itineraries, search for places of interest and add them for each day of their trip so they can plan and keep track of daily activites. Users can also input time it would take to visit and 
+time of day for the visit.
 
 ## Goal
 
 - A web application that allows users to track their trip activities
-- The app will provide the option to add activities per day. 
+- The app will provide the option to add places to visit per day of a trip. 
 - The app will show relevant POIs that can be added to the itinerary.
-- The app will require login - no permission levels required
+- The app will allow the users to add time it would take for each place to visit.
+- The app will require login - no permission levels required.
 
 ## User Profile
 
 There'll be a single user type:
 - Regular users
+  - Users can register/edit registration details and passwords, and log in.
   - Regular users can create, update, and log trips.
-  - Regular users can add activities/POIs to trips.
-  - Regular users can search for POIs.
+  - Regular users can add/edit/remove activities/POIs to trip days.
+  - Regular users can search for POIs to add for each day.
 
 ## Data / API Information
 
 The data about POIs will be privided by the TomTom Places API.
-Users can search for POIs and add them to their itinerary.
-The local database will store information about the trip - optional location and time period. It will also store information about days of the trips - each day will have different activities/POIs added to it, with the time it would take to visit.
+Users can search for destination, then it will be saved to the trip. The location coordinates will be used for geo-bias when querying the API for relevant places to visit.
+For each day of a trip, the users can search for POIs and add them to their itinerary.
+The local database will store information about the trip's location and places, so it doesn't query the TomTom API for each existing trip. It will also store information about days of the trips - each day will have different activities/POIs added to it, with the time it would take to visit.
 
 ## Methodologies
 
@@ -31,10 +35,14 @@ The local database will store information about the trip - optional location and
 - Express.js
 - JavaScript
 - React
+- ReduxToolkit
 - CSS
-- Bootstrap
+- MatrialUI
 - PostreSQL
 - Bcrypt
+- JSONWebToken
+- Axios
+- Lodash debounce
 
 ### Database Schema
 
@@ -43,10 +51,10 @@ The local database will store information about the trip - optional location and
 - DB design assumptions:
 
   - A user can create many trips/itineraries.
-  - A user can create many days in a trip.
+  - Days are created automatically depending on the date range of the trip.
   - A day can have many activities/POIs.
   - A day can belong to one trip.
-  - A POIs can belong to may days and trips.
+  - A POI can belong to may days and trips.
 
 ### Security
 
@@ -66,12 +74,14 @@ MUST-HAVE
 
 | Feature | Estimated Time | Actual Time |
 | ------- | -------------- | ----------- |
-| Create trips     |  10 hrs          | 13 hrs       |
-| Create days for each trip | 2 hrs | 1 hr |
-| Add activities/POIs for each trip | 5 hrs | 3.5 hrs |
+| User registration/login | 30 hours | 34 hrs |
+| Edit user info and passwords | 10 hours | 14 hrs |
+| Create trips     |  20 hrs          | 23 hrs       |
+| Automatically create days for each trip | 12 hrs | 11 hr |
+| Add activities/POIs for each trip | 15 hrs | 13.5 hrs |
 | Add time it takes to visit for each trip | 2 hrs | 1.75 hrs |
-| View/Add/Edit POIs | 1 hr | 1 hr|
-| Single user type | 2 hrs | 1.5 hrs |
+| View/Add/Edit POIs | 23 hr | 21 hr|
+| Single user type | 15 hrs | 11.5 hrs |
 | Dashboard with list of trips| 10 hours | 14 hrs |
 
 
@@ -79,7 +89,7 @@ SHOULD-HAVE
 
 | Feature | Estimated Time | Actual Time |
 | ------- | -------------- | ----------- |
-| Auto-create days based on the trip time range | 10 hr | 10 hr |
+| Save destination coordinates for geo-bias for POIs querying | 15 hr | 17 hr |
 
 
 COULD-HAVE
@@ -122,7 +132,7 @@ Reference to the project board and issues:
 ## User Flow Diagram
 
 
-[User Flow Diagram](UserFlowCapstoneII.jpg)
+[User Flow Diagram](TravellyUserFlow.jpg)
 
 
 
@@ -132,6 +142,7 @@ Reference to the project board and issues:
 | Challenges     | Risk Mitigation Plan / Strategy |
 | -------------- | ------------------------------- |
 | Securing user passwords       | Hashing the passwords with Bcrypt |
+| Securing user sessions       | JSON WebTokens |
 
 ## Out of Scope
 

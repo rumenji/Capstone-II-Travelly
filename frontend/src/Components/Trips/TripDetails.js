@@ -19,6 +19,7 @@ import ErrorAlert from '../ErrorAlert';
 /**Component to show trip details
  * Uses URL parameter for the ID
  * Displays an edit component to edit the trip
+ * Displays the list of days - the user can select a day to see and add activites
  */
 const TripDetails = () => {
     const { tripId } = useParams();

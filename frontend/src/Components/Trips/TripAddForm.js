@@ -8,7 +8,7 @@ import { unwrapResult } from '@reduxjs/toolkit';
 import { debounce } from "lodash";
 import { locationSearch } from '../../thunks';
 import { Autocomplete, TextField, Box, Stack, Button } from '@mui/material';
-import Spinner from "../Spinner";
+import { SpinnerButton } from "../Spinner";
 
 /**Form component to add a trip
  * Sends a request to the backend to request matching locations for the trip
@@ -24,6 +24,8 @@ export const AddTripForm = () => {
     const [fromDate, setFromDate] = useState(null);
     const [searchError, setSearchError] = useState(null)
 
+    //Saves trip data - extracts the info required from the selected location from the external API
+    //Redirects to trip list after successful submission
     const submitForm = async (formData) => {
         if (selectedOption) {
             formData.loc_long = selectedOption.position.lon.toString();
@@ -39,7 +41,7 @@ export const AddTripForm = () => {
     }
 
     const searchTerm = watch("location_name", false);
-
+    //Queries the external API for locations that match the query
     const getPlacePredictions = (query) => {
         if (query) {
             try {
@@ -126,7 +128,7 @@ export const AddTripForm = () => {
                         inputProps={{ min: fromDate }}
                         required />
                     <Button variant="outlined" color="warning" type='submit' className='button'>
-                        {loading_trips ? <Spinner /> : 'Save'}
+                        {loading_trips ? <SpinnerButton /> : 'Save'}
                     </Button>
                 </Stack>
             </form>

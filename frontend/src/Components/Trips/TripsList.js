@@ -23,12 +23,12 @@ export function TripsList() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [checked, setChecked] = useState(false);
-    
+    //Changes the state of the checkmark to view past events
     const handleChecked = (event) => {
         setChecked(event.target.checked)
         setSuccessTrips(false)
     }
-
+    //Fetches trips depending on the state of past trips
     useEffect(() => {
             if (checked) {
                 dispatch(fetchTrips(checked))

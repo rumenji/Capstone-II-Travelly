@@ -22,15 +22,18 @@ export function Trip({ id, name, days }) {
     const [open, setOpen] = useState(false);
     const navigate = useNavigate();
 
+    //Expands and collapses days of trip
     const handleCollapseClick = () => {
         setOpen(!open);
     };
 
+    //Clicking on a day shows the trip details with the day selected
     const handleDayClick = (day) => {
         dispatch(setSelectedDay(day))
         navigate(`/trips/${id}`)
     };
 
+    //Opens the trip details with no day selected
     const handleTripClick = (id) => {
         navigate(`/trips/${id}`)
     };

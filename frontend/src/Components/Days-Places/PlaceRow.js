@@ -11,6 +11,7 @@ import DeleteDialog from '../DeleteDialog';
 function PlaceRow(props) {
   const { row, dayId, editing, index } = props;
   const [open, setOpen] = useState(false);
+  //Categroies are saved as arrays - creates strings from the arrays to display with proper formatting
   const categories = row.details.categories.map((category => category.charAt(0).toUpperCase() + category.slice(1)))
 
   return (

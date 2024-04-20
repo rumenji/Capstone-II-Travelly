@@ -6,7 +6,7 @@ import { Box, Button, Stack, TextField, Link, Alert } from "@mui/material";
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import ClearIcon from '@mui/icons-material/Clear';
-import Spinner from "../Components/Spinner";
+import { SpinnerButton } from "../Components/Spinner";
 
 /**Form component for user details edit
  * Uses yupResolver to validate form fields.
@@ -33,6 +33,7 @@ const UpdateUserForm = ({ back, alert }) => {
         resolver: yupResolver(formSchema)
     })
 
+    //Submit the form and catch if the current password is incorrect do not close - display warning
     const submitForm = async (data) => {
         try {
             // transform email string to lowercase to avoid case sensitivity issues in login
@@ -109,7 +110,7 @@ const UpdateUserForm = ({ back, alert }) => {
 
                     <Button variant="outlined" color="warning" type='submit' className='save-button' disabled={loading}>
 
-                        {loading ? <Spinner /> : 'Save'}
+                        {loading ? <SpinnerButton /> : 'Save'}
                     </Button>
                     <Link variant="outlined" className='back-button' onClick={() => back(false)}>Back</Link>
                 </Stack>

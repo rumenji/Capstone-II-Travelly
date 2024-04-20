@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Typography, Button, Box, Stack } from "@mui/material";
 import Spinner from "./Spinner";
 
-/**Welcome screen for the logged in user */
+/**Welcome screen for the logged in user or log to get access to the app if not logged in*/
 const HomeScreen = () => {
     const { userInfo, loading } = useSelector((state) => state.auth)
     const navigate = useNavigate();

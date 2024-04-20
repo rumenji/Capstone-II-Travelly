@@ -13,6 +13,7 @@ function PlaceRowEdit(props) {
   const { register, getValues } = useForm();
   const dispatch = useDispatch();
 
+  //Handles saving of the edited row - allows for only time of day and time to visit changes
   const handleSaveRow = (rowIndex, timeToVisit, timeOfDay) => {
     // Save changes to the database or perform any other actions
 

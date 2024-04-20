@@ -10,9 +10,11 @@ import PlaceRowEdit from './PlaceRowEdit';
 const Place = ({ places, dayId }) => {
   const [editingRow, setEditingRow] = useState(null);
 
+  //Shows the row edit form
   const handleEdit = (rowIndex) => {
     setEditingRow(rowIndex);
   };
+  //Closes the row edit form
   const handleCancelRow = () => {
     setEditingRow(null);
   };

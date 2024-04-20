@@ -7,7 +7,7 @@ import { registerUser } from "../thunks";
 import { Box, Button, Stack, TextField } from "@mui/material";
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import Spinner from "../Components/Spinner";
+import { SpinnerButton } from "../Components/Spinner";
 
 /**Form component for user registration
  * Uses yupResolver to validate form fields
@@ -137,7 +137,7 @@ const RegisterForm = () => {
                         required />
 
                     <Button variant="outlined" color="warning" type='submit' className='save-button' disabled={loading}>
-                        {loading ? <Spinner /> : 'Register'}
+                        {loading ? <SpinnerButton /> : 'Register'}
                     </Button>
                 </Stack>
             </form>

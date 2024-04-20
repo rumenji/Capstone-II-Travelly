@@ -6,7 +6,7 @@ import { editTrip } from "../../thunks";
 import { TextField, Box, Stack, Button, Typography, Alert } from '@mui/material';
 import { selectTripDetails } from "../../store/tripDetailsSlice";
 import { convertYYYYMMDD } from "../../helpers/helpers";
-import Spinner from "../Spinner";
+import { SpinnerButton } from "../Spinner";
 import ClearIcon from '@mui/icons-material/Clear';
 
 /**Form to edit a trip
@@ -71,7 +71,7 @@ export const TripEditForm = ({ editing }) => {
                         required />
                     <Button variant="outlined" color="error" className='button' onClick={() => editing(false)}>Discard</Button>
                     <Button variant="outlined" color="warning" type='submit' className='button'>
-                        {loading_tripDetails ? <Spinner /> : 'Save'}
+                        {loading_tripDetails ? <SpinnerButton /> : 'Save'}
                     </Button>
                 </Stack>
             </form>

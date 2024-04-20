@@ -12,12 +12,10 @@ If there are users in the app, shared and personal passwords could be created.
 Maybe a password check against a list that can be added by the admin, so user passwords follow a specific requirement.
 The passwords will be encrypted - probably bcrypt.
 
-### 3. US National Parks Info Site
-The National Park Service has an API with info about US National Parks:
-https://www.nps.gov/subjects/developer/get-started.htm
-The app can display a list of the parks, with details when the park page is visited.
-Maybe a rating system with reviews, user notes.
-If login is implemented, maybe the users can build itineraries.
+### 3. Trip Itinerary app
+App for users to add trips, and keep track of days, and places to visit on each day.
+Will have access to TomTom external API for querying locations and POIs.
+Each trip will have dates, days within the date range for the user to add POIs for each day with time it woud take to visit the place, and time of day.
 
 ## Preferred
 I would prefer the second option. Looks like a nice addition to my first capstone.

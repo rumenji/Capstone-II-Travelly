@@ -20,6 +20,7 @@ const PlaceAddForm = ({ tripId, dayId }) => {
     const [clearAutocomplete, setClearAutocomplete] = useState(false);
     const [selectedPlaceError, setSelectedPlaceError] = useState(null)
 
+    //Submits the add new place form and resets the form state including autocomplete fields
     const submitForm = (formData) => {
         if (selectedPlace) {
             try {
