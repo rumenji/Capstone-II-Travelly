@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const corsOptions = {
-  origin: 'https://travelly-frontend.onrender.com/'
+  origin: 'https://travelly-frontend.onrender.com'
 };
 
 app.use(cors(corsOptions));
