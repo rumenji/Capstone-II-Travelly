@@ -8,7 +8,7 @@ import { Button, Box, Stack, TextField, Alert, Typography } from '@mui/material'
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CheckIcon from '@mui/icons-material/Check';
-import Spinner from "../Components/Spinner";
+import {SpinnerButton} from "../Components/Spinner";
 
 /**User login form
  * Uses yupResolver for form field validation
@@ -90,7 +90,7 @@ const LoginForm = () => {
                             {...register('password')}
                             required />
                         <Button variant="outlined" color="warning" type='submit' className='button' disabled={loading}>
-                            {loading ? <Spinner /> : 'Login'}
+                            {loading ? <SpinnerButton /> : 'Login'}
                         </Button>
                         <Typography variant="overline">Don't have an account?</Typography>
                         <Button variant="text" color="warning" onClick={() => navigate("/register")} sx={{ cursor: 'pointer' }}>Click here to register</Button>

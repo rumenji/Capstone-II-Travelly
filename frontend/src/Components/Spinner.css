@@ -14,6 +14,22 @@
     border-radius: 50%;
     animation: spin 1s linear infinite;
   }
+
+  .spinning-wheel-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .spinner-button {
+    width: 10px;
+    height: 10px;
+    border: 2px solid orange;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
   
   @keyframes spin {
     0% {
