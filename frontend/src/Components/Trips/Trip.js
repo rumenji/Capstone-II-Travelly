@@ -35,6 +35,7 @@ export function Trip({ id, name, days }) {
 
     //Opens the trip details with no day selected
     const handleTripClick = (id) => {
+        dispatch(setSelectedDay(null))
         navigate(`/trips/${id}`)
     };
 

@@ -11,11 +11,10 @@ app.use(express.urlencoded({ extended: true }));
 
 const corsOptions = {
   origin: 'https://travelly-frontend.onrender.com'
+  // origin: 'http://127.0.0.1:3000'
 };
 
 app.use(cors(corsOptions));
-// allow connections to all routes from any browser
-// app.use(cors());
 
 // get auth token for all routes
 app.use(authenticateJWT);

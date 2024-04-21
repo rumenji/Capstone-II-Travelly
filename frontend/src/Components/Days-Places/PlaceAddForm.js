@@ -7,13 +7,25 @@ import { unwrapResult } from '@reduxjs/toolkit';
 import { debounce } from "lodash";
 import { placeSearch, placeSave, placeSaveToDay } from '../../thunks';
 import ErrorAlert from '../ErrorAlert';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 /**Form component to add places to a day
  * Calls place related thunks to query the external API
  * Debouncing - allows for a timeout after the user has stopped typing to query to avoid too many requests
  */
 const PlaceAddForm = ({ tripId, dayId }) => {
-    const { register, handleSubmit, watch, reset } = useForm();
+    const formSchema = yup.object().shape({
+        place_name: yup.string()
+            .required('Select a place first'),
+        time_of_day: yup.string()
+            .required('Time of day to visit is required'),
+        time_to_visit: yup.string()
+            .required('Time needed to visit is required')
+    });
+    const { register, handleSubmit, watch, reset, formState: { errors } } = useForm({
+        resolver: yupResolver(formSchema)
+    });
     const [selectedPlace, setSelectedPlace] = useState(null);
     const [searchResults, setSearchResults] = useState([]);
     const dispatch = useDispatch();
@@ -90,6 +102,7 @@ const PlaceAddForm = ({ tripId, dayId }) => {
                         name="place_name"
                         label="Search for places"
                         className='form-input'
+                        error={errors.place_name ? true : false}
                         size="small"
                         {...register('place_name')}
                         required
@@ -103,6 +116,7 @@ const PlaceAddForm = ({ tripId, dayId }) => {
                 label="Select time to visit"
                 className='form-input'
                 size="small"
+                error={errors.time_to_visit ? true : false}
                 sx={{ width: 150 }}
                 {...register('time_to_visit')}
                 required />
@@ -114,6 +128,7 @@ const PlaceAddForm = ({ tripId, dayId }) => {
                 label="Select time of day"
                 className='form-input'
                 defaultValue=""
+                error={errors.time_of_day ? true : false}
                 size="small"
                 sx={{ width: 150 }}
                 {...register('time_of_day')}
