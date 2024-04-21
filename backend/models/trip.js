@@ -8,6 +8,7 @@ class Trip {
      * => id
      */
     static async create({ name, location_name, loc_long, loc_lat, from_date, to_date, username }) {
+        console.log(from_date)
         const sqlQuery = `
             INSERT INTO trips (name, location_name, loc_long, loc_lat, from_date, to_date, user_username) 
             VALUES ($1, $2, $3, $4, $5, $6, $7) 

@@ -20,6 +20,7 @@ export const userFriendlyDateTime = (date) => {
 
 /**Converts datetime to YYYY-MM-DD */
 export const convertYYYYMMDD = (date) => {
+  console.log(date)
   return moment(date).format("YYYY-MM-DD");
 }
 
