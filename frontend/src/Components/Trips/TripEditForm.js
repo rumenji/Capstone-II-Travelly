@@ -29,8 +29,7 @@ export const TripEditForm = ({ editing }) => {
             setApiError(err)
         }
     }
-    console.log(trip.to_date)
-    console.log(convertYYYYMMDD(trip.to_date))
+    
     return (
         <Box justifyContent="center" sx={{ display: "flex", height: "100vh" }}>
             {error_tripDetails && <ErrorAlert error={error_tripDetails} />}
