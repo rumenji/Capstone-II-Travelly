@@ -6,13 +6,24 @@ import CheckIcon from '@mui/icons-material/Check';
 import { selectTime } from '../../helpers/helpers';
 import { useDispatch } from 'react-redux';
 import { placeEditToDay } from '../../thunks';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 /**Inline edit place form - allows to change time to visit, time of day for the place */
 function PlaceRowEdit(props) {
   const { row, cancel, dayId, editingRow } = props;
-  const { register, getValues } = useForm();
   const dispatch = useDispatch();
-
+  const formSchema = yup.object().shape({
+    time_of_day: yup.string()
+        .required('Time of day to visit is required'),
+    time_to_visit: yup.string()
+        .min(0.1, 'Enter number larger than 0.1')
+        .max(24, 'Enter number less than 24')
+        .required('Time needed to visit is required')
+    });
+  const { register, getValues, formState: { errors } } = useForm({
+      resolver: yupResolver(formSchema)
+  });  
   //Handles saving of the edited row - allows for only time of day and time to visit changes
   const handleSaveRow = (rowIndex, timeToVisit, timeOfDay) => {
     // Save changes to the database or perform any other actions
@@ -36,6 +47,7 @@ function PlaceRowEdit(props) {
             name="time_to_visit"
             label="Select time to visit"
             defaultValue={row.time_to_visit}
+            error={errors.time_to_visit ? true : false}
             size="small"
             sx={{ width: 150 }}
             {...register('time_to_visit')}
@@ -47,6 +59,7 @@ function PlaceRowEdit(props) {
             name="time_of_day"
             label="Select time of day"
             defaultValue={row.time_of_day}
+            error={errors.time_of_day ? true : false}
             size="small"
             sx={{ width: 150 }}
             {...register('time_of_day')}

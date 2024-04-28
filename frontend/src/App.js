@@ -15,6 +15,7 @@ import TripDetails from './Components/Trips/TripDetails';
 import DayDetails from './Components/Days-Places/DayDetails';
 import NotFound from './Components/NotFound';
 
+
 /**App component - fetches current user if token is available in the cookies */
 function App() {
   const { userInfo, userToken, loading, error } = useSelector((state) => state.auth)
@@ -32,6 +33,8 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/" element={<HomeScreen />} />
+          
+
           {/* All routes below are protected - require a logged in user */}
           <Route element={<ProtectedRoute />}>
             <Route path='/account' element={<ProfileScreen />} />
