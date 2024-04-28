@@ -16,7 +16,7 @@ function PlaceRowEdit(props) {
   const formSchema = yup.object().shape({
     time_of_day: yup.string()
         .required('Time of day to visit is required'),
-    time_to_visit: yup.string()
+    time_to_visit: yup.number()
         .min(0.1, 'Enter number larger than 0.1')
         .max(24, 'Enter number less than 24')
         .required('Time needed to visit is required')
