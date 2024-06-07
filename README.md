@@ -35,7 +35,8 @@ time of day for the visit.
   3. Frontend - `/frontend`:
   - Install dependencies: `npm run build`
   - Run app: `npm start`
-
+  4. Testing - both front end and backend: `npm test`
+    
 ### Main Features
 
 - A web application that allows users to track their trip activities
