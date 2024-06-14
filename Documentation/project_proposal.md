@@ -2,6 +2,7 @@
 
 This project is about creating a web application that allows users to create trip itineraries, search for places of interest and add them for each day of their trip so they can plan and keep track of daily activites. Users can also input time it would take to visit and 
 time of day for the visit.
+The app allows users to plan each day of their trip, along with the places of interest that they plan on visiting. This way users have a clear view of trip days schedule by time, and the time needed to visit each of the places. The problem solved – to carefully plan your trip beforehand, so you don't have to skip visiting a place due to limited time management.
 
 ## Goal
 
