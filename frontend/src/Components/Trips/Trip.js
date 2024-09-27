@@ -40,8 +40,8 @@ export function Trip({ id, name, days }) {
     };
 
     return (
-        <Grid container spacing={3}>
-            <Grid item xs={3} sx={{ minWidth: '140px' }}>
+        <Grid container spacing={1}>
+            <Grid item xs={3}>
                 <Button color="warning" onClick={() => handleTripClick(id)}>Details</Button>
                 <Box><CalendarTodayIcon fontSize="large" /></Box>
                 <Badge anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}

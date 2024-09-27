@@ -10,8 +10,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const corsOptions = {
-  origin: 'https://travelly-frontend.onrender.com'
-  // origin: 'http://127.0.0.1:3000'
+    credentials: true,
+    preflightContinue: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH' , 'DELETE', 'OPTIONS'],
+    // origin: 'https://travelly-frontend.onrender.com'
+    origin: ['https://travelly-frontend.onrender.com', 'http://127.0.0.1:3000']
 };
 
 app.use(cors(corsOptions));

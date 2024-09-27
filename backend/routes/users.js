@@ -4,21 +4,6 @@ const { ensureLoggedIn, ensureCorrectUser } = require("../middleware/auth");
 
 const router = new Router();
 
-/** get list of users.
- *
- * => {users: [{username, first_name, last_name, email, join_at, last_login_at}, ...]}
- *
- **/
-
-router.get("/", ensureLoggedIn, async function (req, res, next) {
-  try {
-    const users = await User.findAll();
-    return res.json({ users });
-  } catch (err) {
-    return next(err);
-  }
-});
-
 /** get detail of users.
 *
 * => {user: {username, first_name, last_name, email, join_at, last_login_at}}
