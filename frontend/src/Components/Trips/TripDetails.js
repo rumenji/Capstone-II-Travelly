@@ -93,7 +93,7 @@ const TripDetails = () => {
 
                     </HeaderItem>
                 </Grid>
-                <Grid item xs={1}>
+                <Grid item xs={2} md={1}>
                     <List component="div">
                         <Stack spacing={0.3}>
                             {trip.days.map((day) => (
@@ -107,7 +107,7 @@ const TripDetails = () => {
                         </Stack>
                     </List>
                 </Grid>
-                <Grid item xs={11}>
+                <Grid item sx={{ overflow: 'auto' }} xs={10} md={11}>
                     <DayDetailsItem>
                         <Typography variant='h5'>Select day to view scheduled activities</Typography>
                         {selectedDay && (
